@@ -4,10 +4,16 @@ const cors = require("cors")
 
 const app = express()
 
-// ✅ CORS - Pehle ye aana chahiye
+// ✅ FIXED: Support both local and production
 app.use(cors({
-    origin: "http://localhost:5173",
-    credentials: true
+    origin: [
+        "http://localhost:5173",
+        "http://localhost:5174",
+        "https://viva-mate-ai.vercel.app"
+    ],
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"]
 }))
 
 // ✅ Middleware
@@ -28,7 +34,7 @@ const interviewRouter = require("./routes/interview.routes")
 app.use("/api/auth", authRouter)
 app.use("/api/interview", interviewRouter)
 
-// ✅ FIXED: 404 handler - Express 5+ mein "*" ki jagah ye use karo
+// ✅ 404 handler
 app.use((req, res) => {
     res.status(404).json({
         success: false,
