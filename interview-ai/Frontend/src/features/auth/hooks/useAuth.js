@@ -9,20 +9,26 @@ export const useAuth = () => {
     const handleLogin = async ({ email, password }) => {
         setLoading(true);
         try {
+            console.log("🔐 Attempting login for:", email);
             const data = await login({ email, password });
+            console.log("✅ Login successful:", data);
 
             // ✅ TOKEN STORE - AGAR TOKEN HO TO
             if (data?.token) {
                 localStorage.setItem("token", data.token);
+                console.log("📝 Token stored");
             }
 
             if (data?.user) {
                 setUser(data.user);
             }
 
+            // Redirect to home page
+            window.location.href = "/";
             return data;
         } catch (err) {
-            console.error(err);
+            console.error("❌ Login error in hook:", err);
+            alert("Login failed: " + (err.response?.data?.message || err.message));
         } finally {
             setLoading(false);
         }
