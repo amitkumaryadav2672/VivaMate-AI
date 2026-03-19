@@ -14,12 +14,12 @@ const interviewReportSchema = z.object({
         question: z.string().describe("The technical question can be asked in the interview"),
         intention: z.string().describe("The intention of interviewer behind asking this question"),
         answer: z.string().describe("Detailed answer guidance. MUST be 3-4 long sentences explaining the concept thoroughly, what points to cover, and the best approach to take.")
-    })).describe("Technical questions that can be asked in the interview - MUST include 30 questions"),
+    })).describe("Technical questions that can be asked in the interview - MUST include 15 questions"),
     behavioralQuestions: z.array(z.object({
         question: z.string().describe("The behavioral question can be asked in the interview"),
         intention: z.string().describe("The intention of interviewer behind asking this question"),
         answer: z.string().describe("Detailed answer guidance using STAR format. MUST be 3-4 long sentences explaining how to structure the response and what traits to demonstrate.")
-    })).describe("Behavioral questions that can be asked in the interview - MUST include 30 questions"),
+    })).describe("Behavioral questions that can be asked in the interview - MUST include 15 questions"),
     skillGaps: z.array(z.object({
         skill: z.string().describe("The skill which the candidate is lacking"),
         severity: z.enum(["low", "medium", "high"]).describe("The severity of this skill gap, i.e. how important is this skill for the job and how much it can impact the candidate's chances")
@@ -34,7 +34,7 @@ const interviewReportSchema = z.object({
 
 async function generateInterviewReport({ resume, selfDescription, jobDescription }) {
     try {
-        console.log("🤖 AI Service: Generating interview report with 30+30 questions...");
+        console.log("🤖 AI Service: Generating interview report with 15+15 questions...");
 
         const prompt = `Generate an interview report for a candidate with the following details:
 
@@ -43,8 +43,8 @@ Self Description: ${selfDescription}
 Job Description: ${jobDescription}
 
 IMPORTANT REQUIREMENTS:
-1. Generate EXACTLY 30 TECHNICAL QUESTIONS covering all aspects of MERN stack, data structures, algorithms, and system design
-2. Generate EXACTLY 30 BEHAVIORAL QUESTIONS covering teamwork, leadership, conflict resolution, project management
+1. Generate EXACTLY 15 TECHNICAL QUESTIONS covering all aspects of MERN stack, data structures, algorithms, and system design
+2. Generate EXACTLY 15 BEHAVIORAL QUESTIONS covering teamwork, leadership, conflict resolution, project management
 3. Technical questions should include topics like: MongoDB queries and indexing, Express middleware and routing, React hooks and optimization, Node.js performance and event loop, DSA problem-solving, system design, authentication, deployment, testing, etc.
 4. Behavioral questions should follow STAR format in answers and cover: teamwork, leadership, conflict resolution, project management, learning agility, handling failure, etc.
 5. Make questions specific to the candidate's experience from their resume
@@ -88,15 +88,15 @@ The response must be a JSON object with this exact structure:
 
         const parsedResponse = JSON.parse(response.text);
 
-        // Validate and ensure we have 30 questions in each section
-        if (!parsedResponse.technicalQuestions || parsedResponse.technicalQuestions.length < 30) {
-            console.warn(`⚠️ Expected 30 technical questions, got ${parsedResponse.technicalQuestions?.length || 0}`);
-            parsedResponse.technicalQuestions = padTechnicalQuestions(parsedResponse.technicalQuestions || [], 30);
+        // Validate and ensure we have 15 questions in each section
+        if (!parsedResponse.technicalQuestions || parsedResponse.technicalQuestions.length < 15) {
+            console.warn(`⚠️ Expected 15 technical questions, got ${parsedResponse.technicalQuestions?.length || 0}`);
+            parsedResponse.technicalQuestions = padTechnicalQuestions(parsedResponse.technicalQuestions || [], 15);
         }
 
-        if (!parsedResponse.behavioralQuestions || parsedResponse.behavioralQuestions.length < 30) {
-            console.warn(`⚠️ Expected 30 behavioral questions, got ${parsedResponse.behavioralQuestions?.length || 0}`);
-            parsedResponse.behavioralQuestions = padBehavioralQuestions(parsedResponse.behavioralQuestions || [], 30);
+        if (!parsedResponse.behavioralQuestions || parsedResponse.behavioralQuestions.length < 15) {
+            console.warn(`⚠️ Expected 15 behavioral questions, got ${parsedResponse.behavioralQuestions?.length || 0}`);
+            parsedResponse.behavioralQuestions = padBehavioralQuestions(parsedResponse.behavioralQuestions || [], 15);
         }
 
         console.log(`✅ Generated ${parsedResponse.technicalQuestions.length} technical and ${parsedResponse.behavioralQuestions.length} behavioral questions`);
@@ -111,9 +111,9 @@ The response must be a JSON object with this exact structure:
 }
 
 /**
- * @description Pad technical questions to ensure 30 total
+ * @description Pad technical questions to ensure 15 total
  */
-function padTechnicalQuestions(existingQuestions, targetCount = 30) {
+function padTechnicalQuestions(existingQuestions, targetCount = 15) {
     const defaultTechQuestions = [
         // MongoDB Questions (5)
         {
@@ -283,9 +283,9 @@ function padTechnicalQuestions(existingQuestions, targetCount = 30) {
 }
 
 /**
- * @description Pad behavioral questions to ensure 30 total
+ * @description Pad behavioral questions to ensure 15 total
  */
-function padBehavioralQuestions(existingQuestions, targetCount = 30) {
+function padBehavioralQuestions(existingQuestions, targetCount = 15) {
     const defaultBehavioralQuestions = [
         // Teamwork & Collaboration (6)
         {
