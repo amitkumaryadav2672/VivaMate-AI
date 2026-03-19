@@ -28,7 +28,9 @@ export const useAuth = () => {
             return data;
         } catch (err) {
             console.error("❌ [v2] Login error in hook:", err);
-            alert("Login failed (v2): " + (err.response?.data?.message || err.message));
+            // ✅ Detailed error showing for debugging
+            const errorMsg = err.response?.data?.error || err.response?.data?.message || err.message;
+            alert(`Login failed (v2):\n\nMessage: ${err.response?.data?.message}\nError: ${errorMsg}`);
         } finally {
             setLoading(false);
         }
