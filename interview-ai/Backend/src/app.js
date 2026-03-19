@@ -34,6 +34,20 @@ const interviewRouter = require("./routes/interview.routes")
 app.use("/api/auth", authRouter)
 app.use("/api/interview", interviewRouter)
 
+// ✅ Health check for debugging
+app.get("/api/health-check", (req, res) => {
+    res.json({
+        status: "UP",
+        time: new Date(),
+        db: "checking...",
+        env: {
+            node_env: process.env.NODE_ENV,
+            has_mongo: !!process.env.MONGODB_URI,
+            has_jwt: !!process.env.JWT_SECRET
+        }
+    })
+})
+
 // ✅ 404 handler
 app.use((req, res) => {
     res.status(404).json({
@@ -43,13 +57,14 @@ app.use((req, res) => {
     })
 })
 
-// ✅ Error handler
+// ✅ Error handler (Detailed for debugging)
 app.use((err, req, res, next) => {
-    console.error("Error:", err);
+    console.error("❌ BACKEND ERROR:", err);
     res.status(500).json({
         success: false,
-        message: "Internal server error",
-        error: err.message
+        message: "Internal server error (from Backend)",
+        error: err.message,
+        stack: process.env.NODE_ENV === "development" ? err.stack : undefined
     });
 })
 
