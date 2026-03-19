@@ -68,9 +68,15 @@ async function loginUserController(req, res) {
     const { email: rawEmail, password } = req.body
     const email = rawEmail?.toLowerCase();
 
-    console.log(`🔍 [v2] Attempting login for: ${email}`);
+    console.log(`🔍 [v2] Attempting login for identifier: ${email}`);
 
-    const user = await userModel.findOne({ email })
+    // ✅ FIXED: Support login via Email OR Username
+    const user = await userModel.findOne({ 
+        $or: [
+            { email: email }, 
+            { username: email } // In case they typed username in the email field
+        ] 
+    })
 
     if (!user) {
         return res.status(400).json({
