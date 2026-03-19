@@ -42,7 +42,7 @@ app.get("/api/health-check", (req, res) => {
         db: "checking...",
         env: {
             node_env: process.env.NODE_ENV,
-            has_mongo: !!process.env.MONGODB_URI,
+            has_mongo: !!(process.env.MONGO_URI || process.env.MONGODB_URI),
             has_jwt: !!process.env.JWT_SECRET
         }
     })
