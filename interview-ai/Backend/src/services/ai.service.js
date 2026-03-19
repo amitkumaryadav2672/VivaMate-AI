@@ -13,12 +13,12 @@ const interviewReportSchema = z.object({
     technicalQuestions: z.array(z.object({
         question: z.string().describe("The technical question can be asked in the interview"),
         intention: z.string().describe("The intention of interviewer behind asking this question"),
-        answer: z.string().describe("How to answer this question, what points to cover, what approach to take etc.")
+        answer: z.string().describe("Detailed answer guidance. MUST be 3-4 long sentences explaining the concept thoroughly, what points to cover, and the best approach to take.")
     })).describe("Technical questions that can be asked in the interview - MUST include 30 questions"),
     behavioralQuestions: z.array(z.object({
-        question: z.string().describe("The technical question can be asked in the interview"),
+        question: z.string().describe("The behavioral question can be asked in the interview"),
         intention: z.string().describe("The intention of interviewer behind asking this question"),
-        answer: z.string().describe("How to answer this question, what points to cover, what approach to take etc.")
+        answer: z.string().describe("Detailed answer guidance using STAR format. MUST be 3-4 long sentences explaining how to structure the response and what traits to demonstrate.")
     })).describe("Behavioral questions that can be asked in the interview - MUST include 30 questions"),
     skillGaps: z.array(z.object({
         skill: z.string().describe("The skill which the candidate is lacking"),
@@ -49,7 +49,8 @@ IMPORTANT REQUIREMENTS:
 4. Behavioral questions should follow STAR format in answers and cover: teamwork, leadership, conflict resolution, project management, learning agility, handling failure, etc.
 5. Make questions specific to the candidate's experience from their resume
 6. Technical questions should increase in difficulty from basic to advanced
-7. Return ONLY valid JSON with EXACTLY the structure below
+7. IMPORTANT: Each 'answer' field MUST be 3-4 long, detailed sentences. Do NOT provide short one-liners. Ensure the answer is educational and easy to understand.
+8. Return ONLY valid JSON with EXACTLY the structure below
 
 The response must be a JSON object with this exact structure:
 {

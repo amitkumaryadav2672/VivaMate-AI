@@ -453,29 +453,105 @@ $severity-low: #3fb950;
     }
 }
 
-.skill-tag {
-    font-size: 0.775rem;
-    font-weight: 500;
-    padding: 0.3rem 0.7rem;
-    border-radius: 0.4rem;
-    border: 1px solid;
-    cursor: default;
-
-    &--high {
-        color: $severity-high;
-        background-color: rgba($severity-high, 0.1);
-        border-color: rgba($severity-high, 0.25);
+// ── Responsive Design ────────────────────────────────────────────────────────
+@media (max-width: 1024px) {
+    .interview-page {
+        padding: 1rem;
     }
 
-    &--medium {
-        color: $severity-medium;
-        background-color: rgba($severity-medium, 0.1);
-        border-color: rgba($severity-medium, 0.25);
+    .interview-layout {
+        flex-direction: column;
+        max-width: 800px;
     }
 
-    &--low {
-        color: $severity-low;
-        background-color: rgba($severity-low, 0.1);
-        border-color: rgba($severity-low, 0.25);
+    .interview-nav {
+        width: 100%;
+        flex-direction: row;
+        overflow-x: auto;
+        padding: 1rem;
+        border-bottom: 1px solid $border-color;
+        gap: 0.5rem;
+
+        &__label {
+            display: none; // Hide label on mobile nav bar
+        }
+
+        &__item {
+            width: auto;
+            white-space: nowrap;
+            padding: 0.5rem 1rem;
+        }
+    }
+
+    .interview-divider {
+        display: none;
+    }
+
+    .interview-sidebar {
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 1.5rem;
+        background-color: rgba($bg-panel, 0.4);
+        border-top: 1px solid $border-color;
+        justify-content: space-around;
+
+        .sidebar-divider {
+            display: none;
+        }
+
+        .match-score {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .skill-gaps {
+            flex: 2;
+            min-width: 250px;
+        }
+    }
+
+    .interview-content {
+        max-height: none;
+        overflow: visible;
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .interview-nav {
+        padding: 0.75rem;
+        &__item {
+            font-size: 0.8rem;
+        }
+    }
+
+    .content-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+
+        h2 {
+            font-size: 1rem;
+        }
+    }
+
+    .q-card {
+        &__question {
+            font-size: 0.85rem;
+        }
+    }
+
+    .interview-sidebar {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+
+        .skill-gaps {
+            align-items: center;
+            &__list {
+                justify-content: center;
+            }
+        }
     }
 }

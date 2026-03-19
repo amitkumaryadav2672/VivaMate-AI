@@ -357,19 +357,73 @@ $font-stack:     system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Robot
 }
 
 
-// ── Page Footer ───────────────────────────────────────────────────────────────
-.page-footer {
-    display: flex;
-    gap: 1.5rem;
+// ── Responsive Design ────────────────────────────────────────────────────────
+@media (max-width: 900px) {
+    .home-page {
+        padding: 2rem 1rem;
+    }
 
-    a {
-        font-size: 0.8rem;
-        color: $text-muted;
-        text-decoration: none;
-        transition: color 0.2s;
+    .interview-card {
+        border-radius: 0.75rem;
 
-        &:hover {
-            color: $text-primary;
+        &__body {
+            flex-direction: column;
+            min-height: auto;
         }
+
+        &__footer {
+            flex-direction: column;
+            gap: 1.5rem;
+            text-align: center;
+
+            .footer-info {
+                order: 2;
+            }
+
+            .generate-btn {
+                width: 100%;
+                justify-content: center;
+                order: 1;
+            }
+        }
+    }
+
+    .panel-divider {
+        width: 100%;
+        height: 1px;
+    }
+
+    .panel {
+        padding: 1.25rem;
+
+        &--left {
+            .char-counter {
+                bottom: 1.5rem;
+                right: 1.5rem;
+            }
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .page-header {
+        h1 {
+            font-size: 1.75rem;
+        }
+        p {
+            font-size: 0.875rem;
+        }
+    }
+
+    .reports-list {
+        .report-item {
+            flex: 1 0 100%; // Solo items on very small screens
+        }
+    }
+
+    .page-footer {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.75rem;
     }
 }
