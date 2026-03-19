@@ -397,6 +397,10 @@ $font-stack:     system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Robot
     .panel {
         padding: 1.25rem;
 
+        &__textarea {
+            min-height: 250px; // Larger height for 5000 chars on mobile
+        }
+
         &--left {
             .char-counter {
                 bottom: 1.5rem;
