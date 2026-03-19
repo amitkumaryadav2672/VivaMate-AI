@@ -140,9 +140,14 @@ const Home = () => {
 
             {/* Page Footer */}
             <footer className='page-footer'>
-                <a href='#'>Privacy Policy</a>
-                <a href='#'>Terms of Service</a>
-                <a href='#'>Help Center</a>
+                <div className='footer-links'>
+                    <a href='#'>Privacy Policy</a>
+                    <a href='#'>Terms of Service</a>
+                    <a href='#'>Help Center</a>
+                </div>
+                <div className='developer-credit'>
+                    Developed by <a href='https://www.linkedin.com/in/amit-kumar-yadav-52a56529a/' target='_blank' rel='noopener noreferrer'>Amit kumar yadav</a>
+                </div>
             </footer>
         </div>
     )
