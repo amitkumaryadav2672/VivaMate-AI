@@ -12,12 +12,12 @@ const authRouter = Router()
 authRouter.post("/register", authController.registerUserController)
 
 
-/**
- * @route POST /api/auth/login
- * @description login user with email and password
- * @access Public
- */
 authRouter.post("/login", authController.loginUserController)
+
+// ✅ Added GET for manual verification
+authRouter.get("/login", (req, res) => {
+    res.json({ message: "Auth login route is working. Please use POST to login." })
+})
 
 
 /**
