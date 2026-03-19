@@ -9,14 +9,14 @@ export const useAuth = () => {
     const handleLogin = async ({ email, password }) => {
         setLoading(true);
         try {
-            console.log("🔐 Attempting login for:", email);
+            console.log("🔐 [v2] Attempting login for:", email);
             const data = await login({ email, password });
-            console.log("✅ Login successful:", data);
+            console.log("✅ [v2] Login successful:", data);
 
             // ✅ TOKEN STORE - AGAR TOKEN HO TO
             if (data?.token) {
                 localStorage.setItem("token", data.token);
-                console.log("📝 Token stored");
+                console.log("📝 [v2] Token stored");
             }
 
             if (data?.user) {
@@ -27,8 +27,8 @@ export const useAuth = () => {
             window.location.href = "/";
             return data;
         } catch (err) {
-            console.error("❌ Login error in hook:", err);
-            alert("Login failed: " + (err.response?.data?.message || err.message));
+            console.error("❌ [v2] Login error in hook:", err);
+            alert("Login failed (v2): " + (err.response?.data?.message || err.message));
         } finally {
             setLoading(false);
         }
