@@ -14,11 +14,11 @@ const Register = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         await handleRegister({username,email,password})
-        navigate("/")
+        // Redirect will be handled if needed, but for now just clear the redundant navigate
     }
 
     if(loading){
-        return (<main><h1>Loading.......</h1></main>)
+        return (<main><h1>Connecting to Backend (v2).......</h1></main>)
     }
 
     return (

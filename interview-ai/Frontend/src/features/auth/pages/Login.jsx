@@ -14,11 +14,11 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         await handleLogin({email,password})
-        navigate('/')
+        // window.location.href in hook will handle the redirect
     }
 
     if(loading){
-        return (<main><h1>Loading.......</h1></main>)
+        return (<main><h1>Connecting to Backend (v2).......</h1></main>)
     }
 
 
