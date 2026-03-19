@@ -23,7 +23,7 @@ app.use(cookieParser())
 
 // ✅ Root route
 app.get("/", (req, res) => {
-    res.send("Backend Server is Running Successfully!")
+    res.send("Backend Server (v3) is Running Successfully!")
 })
 
 // ✅ Import routes
