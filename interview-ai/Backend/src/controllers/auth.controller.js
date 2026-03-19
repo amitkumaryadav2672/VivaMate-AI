@@ -92,7 +92,13 @@ async function loginUserController(req, res) {
         { expiresIn: process.env.JWT_EXPIRES_IN || "1d" }
     )
 
-    res.cookie("token", token)
+    // ✅ FIXED: Support cross-site cookies for Vercel/Render
+    res.cookie("token", token, {
+        httpOnly: true,
+        secure: true, // Required for sameSite: 'none'
+        sameSite: 'none',
+        maxAge: (parseInt(process.env.JWT_EXPIRES_IN) || 7) * 24 * 60 * 60 * 1000 // Match JWT expiry
+    })
 
     res.status(200).json({
         message: "User loggedIn successfully.",
