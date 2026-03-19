@@ -10,7 +10,8 @@ const tokenBlacklistModel = require("../models/blacklist.model")
  */
 async function registerUserController(req, res) {
 
-    const { username, email, password } = req.body
+    const { username, email: rawEmail, password } = req.body
+    const email = rawEmail?.toLowerCase();
 
     if (!username || !email || !password) {
         return res.status(400).json({
@@ -64,7 +65,10 @@ async function registerUserController(req, res) {
  */
 async function loginUserController(req, res) {
 
-    const { email, password } = req.body
+    const { email: rawEmail, password } = req.body
+    const email = rawEmail?.toLowerCase();
+
+    console.log(`🔍 [v2] Attempting login for: ${email}`);
 
     const user = await userModel.findOne({ email })
 
