@@ -30,7 +30,9 @@ export const useAuth = () => {
             console.error("❌ [v2] Login error in hook:", err);
             // ✅ Detailed error showing for debugging
             const errorMsg = err.response?.data?.error || err.response?.data?.message || err.message;
-            alert(`Login failed (v2):\n\nMessage: ${err.response?.data?.message}\nError: ${errorMsg}`);
+            const isTimeout = err.message.includes("timeout");
+            const timeoutTip = isTimeout ? "\n\nTip: The server might be waking up (Render Free Tier). Please wait a moment and try again!" : "";
+            alert(`Login failed (v2):\n\nMessage: ${err.response?.data?.message}\nError: ${errorMsg}${timeoutTip}`);
         } finally {
             setLoading(false);
         }

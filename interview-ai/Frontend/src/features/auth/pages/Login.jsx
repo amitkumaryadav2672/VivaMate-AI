@@ -18,7 +18,10 @@ const Login = () => {
     }
 
     if(loading){
-        return (<main><h1>Connecting to Backend (v2).......</h1></main>)
+        return (<main className="loading-container">
+            <h1>Connecting to Backend (v2).......</h1>
+            <p style={{ marginTop: '10px', opacity: 0.8 }}>Note: Since we are using a free server, it might take a minute to wake up. Please wait.</p>
+        </main>)
     }
 
 

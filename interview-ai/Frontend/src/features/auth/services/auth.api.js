@@ -6,7 +6,7 @@ const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 const api = axios.create({
     baseURL: API_URL,
     withCredentials: true,
-    timeout: 60000 
+    timeout: 120000 
 })
 
 // ✅ NEW: Automatically add token to headers if it exists
